@@ -26,7 +26,7 @@ def detect_cat(sample):
         cv2.imwrite(f'./out/{sample}', img)
         print('DONE', sample)
     except:
-        print(f'fall to process {sample}')
+        print(f'fail to process {sample}')
 
 
 def main():
