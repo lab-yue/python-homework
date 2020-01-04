@@ -4,9 +4,9 @@ import numbers
 class Sqr:
     def __init__(self, x):
         if (isinstance(x, numbers.Number) and not isinstance(x, bool)):
-            self._x = x
-        else:
             self._x = None
+        else:
+            self._x = x
 
     def getX(self):
         return self._x
