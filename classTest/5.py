@@ -1,36 +1,22 @@
-import numbers
-
-
-class Sqr:
-    def __init__(self, x):
-        if (isinstance(x, numbers.Number) and not isinstance(x, bool)):
-            self._x = None
+def lerp(a, b, t):
+    try:
+        if 0 <= t <= 1:
+            ty = a[1] + (b[1] - a[1]) * (t - a[0]) / (b[0] - a[0])
+            return (t, ty), None
         else:
-            self._x = x
-
-    def getX(self):
-        return self._x
-
-    def setX(self, x):
-        self._x = x
-
-    def getSqrX(self):
-        return self._x ** 2
+            raise ValueError
+    except TypeError:
+        return -1, "parameter is not a number"
+    except ValueError:
+        return -1, "t is out of range"
+    except ZeroDivisionError:
+        return -1, "ax == bx"
 
 
 if __name__ == '__main__':
-
-    # prepare
-    value = 5
-    s = Sqr(value)
-
-    # test getX and getSqrX
-    assert s.getX() == value
-    assert s.getSqrX() == value ** 2
-
-    # test setX
-    s.setX(value ** 2)
-    assert s.getX() == value ** 2
-    assert s.getSqrX() == value ** 4
-
-    print('ok')
+    assert lerp((0, 0), (1, 1), 0)[0] == (0, 0)
+    assert lerp((0, 0), (1, 1), 1)[0] == (1, 1)
+    assert lerp((0, 0), (1, 1), .5)[0] == (.5, .5)
+    assert lerp(("0", "0"), ("0", "0"), 0)[1] == "parameter is not a number"
+    assert lerp((0, 0), (1, 1), 2)[1] == "t is out of range"
+    assert lerp((0, 0), (0, 0), 0)[1] == "ax == bx"
