@@ -165,13 +165,15 @@ class Game(tk.Frame):
         self.h = event.height
 
     def do_one_frame(self):
-
-        if not self.maze._created:
+        while(not self.maze._created):
             self.maze.dig()
-            self.draw()
-            self.after(100, self.do_one_frame)
-        else:
-            self.draw()
+
+        # if not self.maze._created:
+        #    self.maze.dig()
+        #    self.draw()
+        #    self.after(100, self.do_one_frame)
+        # else:
+        self.draw()
 
     def create_widgets(self):
         self.title = tk.Label(self, font=("Courier", 30))
